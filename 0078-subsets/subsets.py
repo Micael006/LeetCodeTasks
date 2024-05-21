@@ -7,6 +7,5 @@ class Solution:
             for j in range(len(helper)):
                 if helper[j] == '1':
                     new_subset.append(nums[j])
-            if new_subset not in ans:
-                ans.append(new_subset)
+            ans.append(new_subset)
         return ans
