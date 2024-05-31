@@ -9,8 +9,9 @@ class Solution:
             n += 1
         cur0 = 0
         cur1 = 0
+        n_2 = 2**n
         for i in range(len(nums)):
-            if nums[i] ^ 2**n > nums[i]:
+            if nums[i] ^ n_2 > nums[i]:
                 cur0 ^= nums[i]
             else:
                 cur1 ^= nums[i]
