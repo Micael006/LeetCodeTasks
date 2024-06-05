@@ -2,7 +2,7 @@ class Solution:
     def commonChars(self, words: List[str]) -> List[str]:
         alphabet = dict()
         for i in range(ord('a'), ord('z') + 1):
-            alphabet[chr(i)] = len(words)
+            alphabet[chr(i)] = 101
         for i in range(len(words)):
             helper = [0] * 26
             for s in words[i]:
