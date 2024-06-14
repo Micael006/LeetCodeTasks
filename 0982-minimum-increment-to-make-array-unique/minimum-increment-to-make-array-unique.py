@@ -1,6 +1,6 @@
 class Solution:
     def minIncrementForUnique(self, nums: List[int]) -> int:
-        count = [0] * 10**6
+        count = [0] * 2 * 10**5
         for i in range(len(nums)):
             count[nums[i]] += 1
         
