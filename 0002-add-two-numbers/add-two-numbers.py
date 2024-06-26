@@ -5,35 +5,37 @@
 #         self.next = next
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        left = l1
-        right = l2
-        overflow = 0
-        while left.next is not None and right.next is not None:
-            cur_val = left.val + right.val + overflow
-            left.val, overflow = cur_val % 10, cur_val // 10
-            left = left.next
-            right = right.next
-        cur_val = left.val + right.val + overflow
-        left.val, overflow = cur_val % 10, cur_val // 10
-        if left.next is None and right.next is None:
-            if overflow != 0:
-                left.next = ListNode(overflow, None)
-            return l1
-        if right.next is None:
-            left = left.next
-        else:
-            left.next = right.next
-            left = left.next
+        extra = 0
+        cur_l = l1
+        cur_r = l2
+        while cur_l.next is not None:
+            cur_val = cur_l.val + extra
 
-        while overflow > 0 and left.next is not None:
-            cur_val = left.val + overflow
-            left.val, overflow = cur_val % 10, cur_val // 10
-            left = left.next
-        cur_val = left.val + overflow
-        left.val, overflow = cur_val % 10, cur_val // 10
-        if overflow > 0:
-            left.next = ListNode(overflow, None)
+            if cur_r is not None:
+                cur_val += cur_r.val
+                cur_r = cur_r.next
+            
+            cur_l.val = cur_val % 10
+            extra = cur_val // 10
+            cur_l = cur_l.next
+
+        cur_val = cur_l.val + extra
+        if cur_r is not None:
+            cur_val += cur_r.val
+            cur_r = cur_r.next
+
+        cur_l.val = cur_val % 10
+        extra = cur_val // 10
+        
+        while cur_r is not None:
+            cur_val = cur_r.val + extra
+            extra = cur_val // 10
+            cur_l.next = ListNode(cur_val % 10, None)
+            
+            cur_l = cur_l.next
+            cur_r = cur_r.next
+        
+        if extra > 0:
+            cur_l.next = ListNode(extra, None)
+        
         return l1
-             
-
-
