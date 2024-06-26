@@ -5,11 +5,9 @@ class Solution:
         l = 0
 
         for i in range(len(s)):
-            if s[i] not in d or d[s[i]] < l:
-                d[s[i]] = i
-            else:
+            if not (s[i] not in d or d[s[i]] < l):
                 max_len = max(i - l, max_len)
                 l = d[s[i]] + 1
-                d[s[i]] = i
+            d[s[i]] = i
         
         return max(max_len, len(s) - l)
