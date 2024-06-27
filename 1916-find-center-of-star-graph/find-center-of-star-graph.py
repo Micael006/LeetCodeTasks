@@ -1,6 +1,5 @@
 class Solution:
     def findCenter(self, edges: List[List[int]]) -> int:
-        first, last = edges[0]
-        if first in edges[1]:
-            return first
-        return last
+        if edges[0][0] == edges[1][0] or edges[0][0] == edges[1][1]:
+            return edges[0][0]
+        return edges[0][1]
