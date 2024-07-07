@@ -5,7 +5,6 @@ class Solution:
         while numBottles > 0:
             ans += numBottles
             emptyBottles += numBottles % numExchange
-            numBottles //= numExchange
-            numBottles += emptyBottles // numExchange
+            numBottles = numBottles // numExchange + emptyBottles // numExchange
             emptyBottles %= numExchange
         return ans
