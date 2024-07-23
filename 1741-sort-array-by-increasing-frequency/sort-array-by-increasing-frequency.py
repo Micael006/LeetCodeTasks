@@ -5,9 +5,6 @@ class Solution:
             my_d[num] = my_d.get(num, 0) + 1
 
         ans = []
-        sorted_items = list(my_d.items())
-        sorted_items.sort(key=lambda tup: (tup[1], -tup[0]))
-        for item in sorted_items:
-            ans += [item[0]] * item[1]
-
+        for key in sorted(my_d.keys(), key=lambda x: (my_d[x], -x)):
+            ans += [key] * my_d[key]
         return ans    
