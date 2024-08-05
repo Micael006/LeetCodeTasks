@@ -2,13 +2,14 @@ class Solution:
     def kthDistinct(self, arr: List[str], k: int) -> str:
         distincts = dict()
         for i in range(len(arr)):
-            if arr[i] not in distincts:
-                distincts[arr[i]] = [i, 0]
-            distincts[arr[i]][1] += 1
-        
-        ordered = [[key, distincts[key][0]] for key in distincts if distincts[key][1] == 1]
-        ordered.sort(key=lambda tup: tup[1])
+            distincts[arr[i]] = distincts.get(arr[i], 0) + 1
 
-        if k <= len(ordered):
-            return ordered[k - 1][0]
+        cur_k = 1
+        for i in range(len(arr)):
+            if distincts[arr[i]] == 1:
+                if cur_k == k:
+                    return arr[i]
+                cur_k += 1
+        
         return ''
+            
