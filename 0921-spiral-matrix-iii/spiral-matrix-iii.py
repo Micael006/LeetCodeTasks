@@ -9,7 +9,7 @@ class Solution:
         cur_dir = 0
         cur_step = 1
         answer = [[rStart, cStart]]
-        while cur_step < 2 * max(cols, rows):
+        while len(answer) < cols * rows:
             for i in range(2):
                 for j in range(cur_step):
                     rStart += directions[cur_dir][1]
