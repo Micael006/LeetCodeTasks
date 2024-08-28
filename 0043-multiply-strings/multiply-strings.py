@@ -4,26 +4,25 @@ class Solution:
             return '0'
 
         answer = [0] * (len(num1) + len(num2))
-        extra = 0
+
         num1 = num1[::-1]
         num2 = num2[::-1]
+
         for i in range(len(num1)):
             for j in range(len(num2)):
-                cur = int(num1[i]) * int(num2[j])
-                z = 0
-                while cur > 0:
-                    answer[i + j + z] += cur % 10
-                    cur //= 10
-                    z += 1
-
-        extra = 0
+                answer[i + j] += int(num1[i]) * int(num2[j])
+        
+        overflow = 0
         for i in range(len(answer)):
-            answer[i] += extra
-            extra = answer[i] // 10
-            answer[i] %= 10
-
-        while answer[-1] == 0:
-            answer.pop()
-
-        return ''.join([str(x) for x in answer[::-1]])            
+            answer[i] += overflow
+            overflow = answer[i] // 10
+            answer[i] = str(answer[i] % 10)
+        
+        last_zero = len(answer)
+        while answer[last_zero - 1] == '0':
+            last_zero -= 1
+        
+        answer = answer[:last_zero]
+        
+        return ''.join(answer[::-1])
 
