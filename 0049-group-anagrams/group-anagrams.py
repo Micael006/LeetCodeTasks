@@ -1,12 +1,14 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        my_dict = dict()
-
-        for i in range(len(strs)):
-            cur = ''.join(sorted(strs[i]))
-            if cur not in my_dict:
-                my_dict[cur] = []
-            my_dict[cur].append(strs[i])
+        strs.sort(key=lambda x: sorted(x))
+        answer = []
+        helper = [strs[0]]
+        for i in range(1, len(strs)):
+            if sorted(strs[i]) != sorted(helper[-1]):
+                answer.append(helper)
+                helper = []
+            helper.append(strs[i])
         
-        return my_dict.values()
-            
+        answer.append(helper)
+
+        return answer
