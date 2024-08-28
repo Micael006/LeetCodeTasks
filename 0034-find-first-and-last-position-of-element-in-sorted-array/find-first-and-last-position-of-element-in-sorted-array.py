@@ -3,10 +3,10 @@ class Solution:
         l, r = 0, len(nums) - 1
         while l <= r:
             m = (l + r) // 2
-            if target <= nums[m]:
-                r = m - 1
-            else:
+            if nums[m] < target:
                 l = m + 1
+            else:
+                r = m - 1
         
         if l >= len(nums):
             return [-1, -1]
@@ -18,9 +18,9 @@ class Solution:
         l, r = 0, len(nums) - 1
         while l <= r:
             m = (l + r) // 2
-            if (target + 1) <= nums[m]:
-                r = m - 1
-            else:
+            if nums[m] < target + 1:
                 l = m + 1
-
-        return [start, max(start, l - 1)]        
+            else:
+                r = m - 1
+        
+        return [start, max(start, l - 1)]
