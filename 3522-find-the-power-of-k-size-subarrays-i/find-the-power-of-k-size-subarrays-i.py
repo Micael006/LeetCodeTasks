@@ -1,12 +1,16 @@
 class Solution:
     def resultsArray(self, nums: List[int], k: int) -> List[int]:
         answer = []
-        for i in range(len(nums) - k + 1):
-            stopped = False
-            for j in range(i + 1, i + k):
-                if nums[j] - nums[j - 1] != 1:
-                    stopped = True
-                    break
-            answer.append(-1 if stopped else nums[i + k - 1])
+        window = deque([])
+        for i in range(len(nums)):
+            if len(window) == k:
+                window.popleft()
+            if len(window) > 0 and nums[i] - window[-1] != 1:
+                window = deque([])
+            window.append(nums[i])
+            if len(window) == k:
+                answer.append(window[-1])
+            else:
+                answer.append(-1)
 
-        return answer
+        return answer[k - 1:]
