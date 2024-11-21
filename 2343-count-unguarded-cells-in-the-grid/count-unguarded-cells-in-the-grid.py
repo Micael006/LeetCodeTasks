@@ -1,17 +1,33 @@
 class Solution:
     def countUnguarded(self, m: int, n: int, guards: List[List[int]], walls: List[List[int]]) -> int:
-        grid = [[0] * n for _ in range(m)]
-
-        for x, y in guards + walls:
-            grid[x][y] = 2  
-
-        directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
-        for gx, gy in guards:
-            for dx, dy in directions:
-                x, y = gx, gy
-
-                while 0 <= x + dx < m and 0 <= y + dy < n and grid[x + dx][y + dy] != 2:
-                    x += dx
-                    y += dy
-                    grid[x][y] = 1 
-        return sum(row.count(0) for row in grid)
+        visited = []
+        for i in range(m):
+            visited.append([0] * n)
+        
+        for row, col in walls + guards:
+            visited[row][col] = -1
+        
+        for row, col in guards:
+            for i in range(row - 1, -1, -1):
+                if visited[i][col] == -1:
+                    break
+                visited[i][col] += 1
+            for i in range(row + 1, m):
+                if visited[i][col] == -1:
+                    break
+                visited[i][col] += 1
+            for i in range(col - 1, -1, -1):
+                if visited[row][i] == -1:
+                    break
+                visited[row][i] += 1
+            for i in range(col + 1, n):
+                if visited[row][i] == -1:
+                    break
+                visited[row][i] += 1
+        
+        answer = 0
+        for row in range(m):
+            for col in range(n):
+                answer += visited[row][col] == 0
+        
+        return answer
