@@ -3,11 +3,13 @@ class Solution:
         cur_min = 10**10
         cur_sum = 0
         negative_count = 0
+        abs_elem = -1
         for i in range(len(matrix)):
             for j in range(len(matrix[i])):
-                if abs(matrix[i][j]) < cur_min:
-                    cur_min = abs(matrix[i][j])
-                cur_sum += abs(matrix[i][j])
+                abs_elem = abs(matrix[i][j])
+                if abs_elem < cur_min:
+                    cur_min = abs_elem
+                cur_sum += abs_elem
                 if matrix[i][j] < 0:
                     negative_count += 1
         
