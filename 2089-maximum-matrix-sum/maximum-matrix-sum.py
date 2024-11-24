@@ -5,7 +5,8 @@ class Solution:
         negative_count = 0
         for i in range(len(matrix)):
             for j in range(len(matrix[i])):
-                cur_min = min(cur_min, abs(matrix[i][j]))
+                if abs(matrix[i][j]) < cur_min:
+                    cur_min = abs(matrix[i][j])
                 cur_sum += abs(matrix[i][j])
                 if matrix[i][j] < 0:
                     negative_count += 1
