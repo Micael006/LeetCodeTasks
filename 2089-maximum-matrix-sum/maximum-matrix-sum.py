@@ -7,7 +7,8 @@ class Solution:
             for j in range(len(matrix[i])):
                 cur_min = min(cur_min, abs(matrix[i][j]))
                 cur_sum += abs(matrix[i][j])
-                negative_count += matrix[i][j] < 0
+                if matrix[i][j] < 0:
+                    negative_count += 1
         
         if negative_count % 2:
             cur_sum -= 2 * cur_min
